@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.nelson.ramirez.happytoday.data.FeelingsRepository
 
 class FeelingsViewModel(private val repository: FeelingsRepository) :
     ViewModel() {

@@ -1,4 +1,4 @@
-package com.nelson.ramirez.happytoday
+package com.nelson.ramirez.happytoday.data
 
 import android.content.Context
 
