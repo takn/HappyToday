@@ -35,3 +35,7 @@ Navigation will be done with Compose Navigation using the bottom bar scaffold.
 # Assumptions
 
 After adding a "other" thing, deselecting it does not remove it. It remains in the list of choices.
+
+# Screenshots
+
+![Screenshot](screenshot.png)
