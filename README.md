@@ -32,9 +32,6 @@ Navigation will be done with Compose Navigation using the bottom bar scaffold.
 // Other alignment is a bit off
 //TODO the selection colors for bottom menu can be defined in the theme
 
-// Ran out of time, when fetching the stored choices from shared prefs, they are not restored in the
-same order.
-
 # Assumptions
 
 After adding a "other" thing, deselecting it does not remove it. It remains in the list of choices.

@@ -18,13 +18,18 @@ class FeelingsDataSource() {
 
     fun loadFeelings(context: Context) {
         val prefs = context.getSharedPreferences("feelings", Context.MODE_PRIVATE)
-        feelings.clear()
-        val allPrefs = prefs.all as Map<String, Boolean>
-        if (allPrefs.isEmpty()) {
+//        feelings.clear()
+        prefs.all?.let {
+            val allPrefs = it as Map<String, Boolean>
+            if (allPrefs.isEmpty()) {
+                feelings.putAll(_defaultFeelings)
+                return
+            }
+            feelings.putAll(allPrefs)
+        } ?: run {
             feelings.putAll(_defaultFeelings)
-            return
         }
-        feelings.putAll(allPrefs)
-        println("loaded feelings: $feelings")
+
+
     }
 }
