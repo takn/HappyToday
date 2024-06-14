@@ -1,6 +1,8 @@
 package com.nelson.ramirez.happytoday.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -9,6 +11,8 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.InputChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +26,7 @@ import com.nelson.ramirez.happytoday.ui.components.FeelingsDialog
 import com.nelson.ramirez.happytoday.FeelingsIntents
 import java.lang.ref.WeakReference
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     state: MutableState<Map<String, Boolean>>,
@@ -36,17 +41,13 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(16.dp))
         LazyVerticalGrid(
             modifier = Modifier.weight(1f),
-            columns = GridCells.Fixed(3)
+            columns = GridCells.Fixed(4),
+            horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             state.value.forEach {
-                item {
-                    Button(
-                        shape = MaterialTheme.shapes.small,
-                        modifier = Modifier
-                            .padding(4.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = if (it.value) MaterialTheme.colorScheme.inversePrimary else MaterialTheme.colorScheme.primary
-                        ),
+                item(key = it.key) {
+                    InputChip(
+                        selected = it.value,
                         onClick = {
                             intentHandler(
                                 FeelingsIntents.UpdateFeeling(
@@ -55,20 +56,17 @@ fun HomeScreen(
                                 )
                             )
                         },
-                    ) {
-                        Text(it.key, maxLines = 1)
-                    }
-
+                        label = { Text(text = it.key) })
                 }
             }
-            item {
-                Button(
-                    shape = MaterialTheme.shapes.small,
+            item(key = "other") {
+                InputChip(
+                    selected = false,
                     modifier = Modifier
                         .padding(4.dp),
-                    onClick = { intentHandler(FeelingsIntents.Other) }) {
-                    Text("Other...")
-                }
+                    onClick = { intentHandler(FeelingsIntents.Other) },
+                    label = { Text(text = "Other...") }
+                )
             }
         }
         val context = LocalContext.current
